@@ -23,4 +23,11 @@ describe('Testing Hotel Booking Process', function () {
     cy.url().should('include', 'booking.com/searchresults');
   });
 
+  it('Visits reservation page', () => {
+    cy.get('.sr-hotel__title a').first().invoke('removeAttr', 'target').click();
+    cy.url().should('include', 'booking.com/hotel')
+    cy.get('.hprt-nos-select').first().select(`1`).should('have.value', '1');
+    cy.get('.js-reservation-button').first().click({ force: true });
+  });
+
   });
