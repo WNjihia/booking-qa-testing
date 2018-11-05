@@ -5,17 +5,17 @@ const setDate = (row) => {
   .find('td').first().click();
 };
 
-describe('Testing Hotel Booking Process', function () {
-  before(function(){
-    Cypress.Cookies.preserveOnce(cy.getCookies)
+describe('Booking Process', () => {
+  before(() => {
+    Cypress.Cookies.preserveOnce(cy.getCookies);
   })
 
-  it('Visits the Booking Site', function () {
+  it('visit booking.com', () => {
     cy.visit('https://booking.com');
-    cy.url().should('include', 'booking.com')
+    cy.url().should('include', 'booking.com');
   });
 
-  it('Searches for available hotels', () => {
+  it('search for available hotels', () => {
     cy.get('#ss').type('London').should('have.value', 'London');
     cy.get('.sb-autocomplete__badge.sb-autocomplete__badge--popular')
       .first().click();
@@ -25,18 +25,18 @@ describe('Testing Hotel Booking Process', function () {
     cy.url().should('include', 'booking.com/searchresults');
   });
 
-  it('Visits reservation page', () => {
+  it('go to reservation page', () => {
     cy.get('.sr-hotel__title a').first().invoke('removeAttr', 'target').click();
-    cy.url().should('include', 'booking.com/hotel')
+    cy.url().should('include', 'booking.com/hotel');
     cy.get('.hprt-nos-select').first().select(`1`).should('have.value', '1');
     cy.get('.js-reservation-button').first().click({ force: true });
   });
 
-  it('Make booking', () => {
+  it('make reservation', () => {
     cy.get('#lastname').type('Tester').should('have.value', 'Tester');
     cy.get('#email').type('test@test.com').should('have.value', 'test@test.com');
     cy.get('#email_confirm').type('test@test.com').should('have.value', 'test@test.com');
-    cy.get('.submit_holder_button').click()
+    cy.get('.submit_holder_button').click();
   });
 
   });
