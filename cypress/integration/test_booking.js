@@ -1,5 +1,12 @@
+const setDate = (row) => {
+  return cy.get('.bui-calendar__wrapper')
+  .last()
+  .find(`tbody>tr:nth-child(${row})`)
+  .find('td').first().click();
+};
+
 describe('Testing Hotel Booking Process', function () {
-  beforeEach(function(){
+  before(function(){
     Cypress.Cookies.preserveOnce(cy.getCookies)
   })
 
@@ -12,13 +19,8 @@ describe('Testing Hotel Booking Process', function () {
     cy.get('#ss').type('London').should('have.value', 'London');
     cy.get('.sb-autocomplete__badge.sb-autocomplete__badge--popular')
       .first().click();
-    cy.get('.bui-calendar__wrapper')
-      .last()
-      .find('tbody>tr')
-      .last()
-      .find('td')
-      .first().click()
-      .next().click();
+    setDate(3); // checkin date
+    setDate(4); // checkout date
     cy.get('.sb-searchbox__button').click();
     cy.url().should('include', 'booking.com/searchresults');
   });
