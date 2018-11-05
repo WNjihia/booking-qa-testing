@@ -30,4 +30,11 @@ describe('Testing Hotel Booking Process', function () {
     cy.get('.js-reservation-button').first().click({ force: true });
   });
 
+  it('Make booking', () => {
+    cy.get('#lastname').type('Tester').should('have.value', 'Tester');
+    cy.get('#email').type('test@test.com').should('have.value', 'test@test.com');
+    cy.get('#email_confirm').type('test@test.com').should('have.value', 'test@test.com');
+    cy.get('.submit_holder_button').click()
+  });
+
   });
