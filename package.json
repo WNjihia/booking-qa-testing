@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "cypress open"
+    "start": "cypress open"
   },
   "devDependencies": {
     "cypress": "^3.1.0"
